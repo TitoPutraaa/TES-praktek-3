@@ -22,17 +22,17 @@ public class Sendiri {
                 System.out.print("masukan jumlah data : ");
                 int jmlhData = scan.nextInt();
                 nama = new String[jmlhData];
-                noHp = noHp[jmlhData];
-                alamat = alamat[jmlhData];
+                noHp = new String[jmlhData];
+                alamat = new String[jmlhData];
                 inputData(scan, nama, noHp, alamat);
                         break;
                 case 2:
-                    
+                    int hasilCari = cariData(scan, nama, noHp, alamat);
+                    tampilData(scan, hasilCari, nama, noHp, alamat);
                         break;
-                    
+                                        
                 case 3:
-                    
-                        break;
+                    return;
                 default:
                     System.out.println("masukan pilihan yang tersedia 1/2/3");
                         break;
@@ -41,8 +41,8 @@ public class Sendiri {
     }
                     
         static void inputData(Scanner scan, String[] nama, String[] noHp, String[] alamat) {
-
             for (int i = 0; i < nama.length; i++) {
+                scan.nextLine();
                 System.out.println("      PEGAWAI KE - " + (i+1));  
                 System.out.print("masukan nama : ");
                 nama[i] = scan.nextLine();
@@ -50,6 +50,28 @@ public class Sendiri {
                 noHp[i] = scan.next();
                 System.out.print("masukan alamat : ");
                 alamat[i] = scan.next();
+            }
+        }
+
+        static int cariData(Scanner scan, String[] nama, String[] noHp, String[] alamat) {
+            System.out.print("masukan nama yang ingin di cari : ");
+            scan.nextLine();
+            String target = scan.nextLine();
+            for (int i = 0; i < nama.length; i++) {
+                if (nama[i].equalsIgnoreCase(target)) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        static void tampilData(Scanner scan, int hasilCari, String[] nama, String[] noHp, String[] alamat) {
+            if (hasilCari >= 0) {
+                System.out.println("Nama : " + nama[hasilCari]);
+                System.out.println("nomor HP : " + noHp[hasilCari]);
+                System.out.println("alamat : " + alamat[hasilCari]);
+            } else {
+                System.out.println("data tidak ditemukan");
             }
         }
 }
